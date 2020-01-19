@@ -2,7 +2,7 @@
 
 Spring boot + JPA (database Postgresql) + Spring MVC + JSP
 
-## Install postgresql database docker to local
+## **Step 1:** Install postgresql database docker to local
 
 ### Search and pull postgresql docker image
 ```
@@ -45,7 +45,7 @@ Import script file location: src/main/resources/import.sql
 
 Use the script file to create tables and import data to presgresql database
 
-## Set up database connection in calculator application
+## **Step 2:** Set up database connection in calculator application
 
 Configuration file location: src/main/resources/application.properties
 ```
@@ -56,24 +56,27 @@ spring.datasource.password=postgres
 
 **Note**: Local IP address is required for database connection in docker network
 
-# Build the code and package with war for docker image
+## **Step 3:** Build the code and package with war for docker image
 ```
 $ mvn clean package
 ```
 
-# Create an application docker image
+### Create an application docker image
 ```
 $ docker build -f Dockerfile -t claim-calc-springboot-docker .
 $ docker images
 ```
 
-# Run docker
+### Run docker
 ```
 $ docker run -t --name claim-calc-springboot-docker --link pgdocker:dbpg -p 9093:9093 claim-calc-springboot-docker
 $ docker ps -a
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                              NAMES
+1f00dea18843        claim-calc-springboot-docker   "sh -c 'java -Djava.…"   38 hours ago        Up 2 hours          8080/tcp, 0.0.0.0:9093->9093/tcp   claim-calc-springboot-docker
+20cd67b0b6b2        postgres                       "docker-entrypoint.s…"   3 days ago          Up 36 hours         0.0.0.0:5432->5432/tcp             pgdocker
 ```
 
-# Browser the application
+### Browser the application
 ```
 URL: http://localhost:9093
 ```
