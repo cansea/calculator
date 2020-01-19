@@ -7,7 +7,6 @@ Spring boot + JPA (database Postgresql) + Spring MVC + JSP
 ### Search and pull postgresql docker image
 ```
 $ docker search postgres
-
 $ docker pull postgres
 ```
 
@@ -16,18 +15,14 @@ $ docker pull postgres
 $ docker run -d --name pgdocker -p 5432:5432 postgres
 ```
 
-### Create database called `calc`
+### Create database called **calc**
 ```
 $ docker exec -ti [db-container] bash
-
 $ su postgres
-
 $ psql
-
 psql (11.2 (Debian 11.2-1.pgdg90+1))
 Type "help" for help.
 postgres=#
-
 postgres=# create database calc;
 CREATE DATABASE
 ```
@@ -37,7 +32,7 @@ CREATE DATABASE
 postgres=# \l
 ```
 
-### Connect to database `calc`
+### Connect to database **calc**
 ```
 postgres=# \c calc
 You are now connected to database "calc" as user "postgres".
@@ -59,20 +54,23 @@ spring.datasource.username=postgres
 spring.datasource.password=postgres
 ````
 
-**Note**: local ip address is required for database connection in docker network
+**Note**: Local IP address is required for database connection in docker network
 
 # Build the code and package with war for docker image
-
+```
 $ mvn clean package
+```
 
 # Create an application docker image
 ```
-$> docker build -f Dockerfile -t claim-calc-springboot-docker .
+$ docker build -f Dockerfile -t claim-calc-springboot-docker .
+$ docker images
 ```
 
 # Run docker
 ```
-$> docker run -t --name claim-calc-springboot-docker --link pgdocker:dbpg -p 9093:9093 claim-calc-springboot-docker
+$ docker run -t --name claim-calc-springboot-docker --link pgdocker:dbpg -p 9093:9093 claim-calc-springboot-docker
+$ docker ps -a
 ```
 
 # Browser the application
