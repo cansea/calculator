@@ -20,7 +20,11 @@ $ docker run -d --name pgdocker -p 5432:5432 postgres
 
 ### Create database called **calc**
 ```
-$ docker exec -ti [db-container] bash
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+20cd67b0b6b2        postgres            "docker-entrypoint.s…"   5 seconds ago       Up 4 seconds        0.0.0.0:5432->5432/tcp   pgdocker
+
+$ docker exec -ti pgdocker bash
 $ su postgres
 $ psql
 psql (11.2 (Debian 11.2-1.pgdg90+1))
@@ -78,7 +82,7 @@ $ mvn clean package
 $ docker build -f Dockerfile -t claim-calc-springboot-docker .
 $ docker images
 REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
-claim-calc-springboot-docker   latest              afc9f81e71bc        38 hours ago        191MB
+claim-calc-springboot-docker   latest              afc9f81e71bc        18 hours ago        191MB
 postgres                       latest              ec5d6d5f5b34        3 weeks ago         394MB
 tomcat                         8.5-alpine          8b8b1eb786b5        8 months ago        106MB
 openjdk                        8-jdk-alpine        a3562aa0b991        8 months ago        105MB
@@ -89,8 +93,8 @@ openjdk                        8-jdk-alpine        a3562aa0b991        8 months 
 $ docker run -t --name claim-calc-springboot-docker --link pgdocker:dbpg -p 9093:9093 claim-calc-springboot-docker
 $ docker ps -a
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                              NAMES
-1f00dea18843        claim-calc-springboot-docker   "sh -c 'java -Djava.…"   38 hours ago        Up 2 hours          8080/tcp, 0.0.0.0:9093->9093/tcp   claim-calc-springboot-docker
-20cd67b0b6b2        postgres                       "docker-entrypoint.s…"   3 days ago          Up 36 hours         0.0.0.0:5432->5432/tcp             pgdocker
+1f00dea18843        claim-calc-springboot-docker   "sh -c 'java -Djava.…"   12 hours ago        Up 2 hours          8080/tcp, 0.0.0.0:9093->9093/tcp   claim-calc-springboot-docker
+20cd67b0b6b2        postgres                       "docker-entrypoint.s…"   20 hours ago        Up 12 hours         0.0.0.0:5432->5432/tcp             pgdocker
 ```
 
 ### Browser the application
