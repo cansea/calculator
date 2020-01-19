@@ -7,6 +7,9 @@ Spring boot + JPA (database Postgresql) + Spring MVC + JSP
 ### Search and pull postgresql docker image
 ```
 $ docker search postgres
+NAME                                         DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+postgres                                     The PostgreSQL object-relational database sy…   6519                [OK]
+
 $ docker pull postgres
 ```
 
@@ -30,6 +33,15 @@ CREATE DATABASE
 ### List databases
 ```
 postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ calc      | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
 ```
 
 ### Connect to database **calc**
@@ -65,6 +77,11 @@ $ mvn clean package
 ```
 $ docker build -f Dockerfile -t claim-calc-springboot-docker .
 $ docker images
+REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
+claim-calc-springboot-docker   latest              afc9f81e71bc        38 hours ago        191MB
+postgres                       latest              ec5d6d5f5b34        3 weeks ago         394MB
+tomcat                         8.5-alpine          8b8b1eb786b5        8 months ago        106MB
+openjdk                        8-jdk-alpine        a3562aa0b991        8 months ago        105MB
 ```
 
 ### Run docker
