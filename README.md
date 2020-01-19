@@ -98,6 +98,6 @@ CONTAINER ID        IMAGE                          COMMAND                  CREA
 ```
 
 ### Browser the application
-```
-URL: http://localhost:9093
-```
+
+URL: [http://localhost:9093](http://localhost:9093/)
+
